@@ -58,14 +58,4 @@ func ItoaBase(value, base int) string {
 	return result
 }
 
-func PrintMemory(arr [10]byte) {
-	for _, b := range arr {
-		// Extract the upper 4 bits and the lower 4 bits
-		upper := (b >> 4) & 0xF
-		lower := b & 0xF
 
-		// Convert these to hexadecimal characters using the digits string
-		fmt.Printf("%X%X ", upper, lower)
-	}
-	fmt.Println()
-}
