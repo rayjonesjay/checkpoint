@@ -8,12 +8,6 @@ import (
 )
 
 func main() {
-	fmt.Println(HashCode("A"))
-	fmt.Println(HashCode("AB"))
-	fmt.Println(HashCode("BAC"))
-	fmt.Println(HashCode("Hello World"))
-	fmt.Println(HashCode("14 Avril 1973"))
-
 	fmt.Println("------------------------TESTS-------------------------------")
 	table := []string{"Z", "Hi!", "BB198365", "sabito", "14 Avril 1912", "zyx987bca", "		pool-2020", "965truma747", " Mercedes-AMG GT"}
 	for _, s := range table {
