@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/01-edu/go-tests/lib/challenge"
 	"github.com/01-edu/go-tests/lib/random"
@@ -31,10 +32,15 @@ func ItoaBase(value, base int) string {
 	if base < 2 || base > 16 {
 		return "Wrong Base"
 	}
+
 	result := ""
 	// check if value is negative
 	if value < 0 {
-		result = "-" + ItoaBase(-value, base)
+		if value == math.MinInt { // Special case for math.MinInt
+			return "-" + ItoaBase(-(value/base), base) + string("0123456789ABCDEF"[-(value%base)])
+		}
+		return "-" + ItoaBase(-value, base)
+
 	}
 
 	s := "0123456789ABCDEF"
