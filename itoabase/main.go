@@ -33,14 +33,25 @@ func ItoaBase(value, base int) string {
 		return "Wrong Base"
 	}
 
+	if value == 0 {
+		return "0"
+	}
+	
 	result := ""
-	// check if value is negative
-	if value < 0 {
-		if value == math.MinInt { // Special case for math.MinInt
-			return "-" + ItoaBase(-(value/base), base) + string("0123456789ABCDEF"[-(value%base)])
+	
+	isNegative := value < 0
+	
+	if isNegative {
+		
+		// -1 << 31 is same as math.MinInt32  -1 << 63 is same as math.MinInt64 
+		if value <= -1 << 31 {
+			// take care of the last digit
+			lastDigit := -(value%base)
+			value = -(value/base)
+			return "-" + ItoaBase(value, base) + string("0123456789ABCDEF"[lastDigit])
 		}
-		return "-" + ItoaBase(-value, base)
-
+		
+		value = -value
 	}
 
 	s := "0123456789ABCDEF"
@@ -51,6 +62,9 @@ func ItoaBase(value, base int) string {
 		value /= base
 	}
 
+	if isNegative {
+		return  "-" + result 
+	}
 	if result == "" {
 		return "0"
 	}
